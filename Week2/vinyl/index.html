@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+        
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Pre Fab</title>
+        <meta name="description" content="Weekly assignments">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        
+        <h1>Using a Vinyl cutter to make signs</h1>
+         <p>
+           This page takes you through the various steps you need to go through to make a cool vinyl sticker using a Roland CAMM-1 Servo vinyl cutter.
+        </p>    
+
+<p>A vinyl cutter has prolific number of applications contrary to the general notion that it can be used just to make stickers. Using this you can make screens for making Tshirts using screen printing, make flexible circuits on copper tape, sign boards and much more including making quirky stickers. In this tutorial I will be showing you how to make a small vinyl sticker using a vinyl cutter. The machine we are using is a Roland CAMM-1 Servo from FabLab Kerala.&nbsp;</p>
+                 <center><img alt="Roland" src="roland.jpg" /></center>
+<p><strong>What are the things required to do this?</strong></p>
+<ol>
+<li>Roland CAMM-1 Servo vinyl cutter</li>
+<li>A vinyl roll.</li>
+<li>A PC running Ubuntu.</li>
+<li>Masking tape.</li>
+<li>Tweezers.</li>
+<li>Scissors</li>
+</ol>
+<p><strong>How does it work?&nbsp;</strong></p>
+       <center> <img alt="Block diagram" src="block.jpg" /></center>
+<p>The process flow for making a vinyl sticker is pretty simple. You need to have a dual tone (black/white) .png file. For example this:</p>
+<center><img alt="atom" src="atom.png" /></center>
+<p>This file is then launched using the FabModules and fed into the vinyl cutter using the desktop interface. You can find the steps for doing this in detail below.</p>
+<p><strong>Step 1: Preparing the .png cut file&nbsp;</strong></p>
+<p>Here, in order to cut patterns on vinyl using the machine, you need to have the design on a .png file. The file needs to be dual tone having only black and white colors, having a minimum size of 500px. You can use softwares like Gimp, CorelDraw or any other drawing software that lets you export .png files. Here, I am using a drawing I downloaded from the internet and checking the same by opening it using the Gimp software on Linux.</p>
+<center><img alt="gimp" src="gimp.jpg" /></center>        
+<p><strong>Step 2: Using the Fab Modules</strong></p>
+<p>If you are new to Fab Modules, you can start by downloading and installing the software using this tutorial: <a target="_blank" href="http://fabacademy.org/archives/content/tutorials/General_Machine_Tutorials/Fab_Modules/Installing_Updating_Fab_Modules.html">link</a>.</p>
+<p>Next you need to start the fab modules by running the command &ldquo;fab&rdquo; from the terminal. Select the input format to be .png and the output to be the Roland CAMM1-Servo (.camm). Then click on &ldquo;load .png&rdquo; and select &ldquo;resize&rdquo; if you wish to change the size of the sticker.&nbsp;</p>
+<p>After that click on &ldquo;Make .path&rdquo; to create the .path file and then make the machine file for the cutter by clicking on &ldquo;Make .camm&rdquo;.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Step 3: Setting the machine</strong></p>
+<p>Now we get to the most exciting part, playing with the machine. Here, first we need to load the vinyl roll to the machine. This is done by pressing down the lever on the right and sliding the roll in as in the figure below:</p>
+<center><img alt="leverdown" src=down.jpg /></center>
+<p>Ensure that the rollers of the machine are over the white portion as in the figure below:</p>
+<center><img alt="rollers" src="rollers.jpg" /></center>
+<p>Next, lock the material in the cutter after aligning it properly by pulling the lever on the right up.</p>
+<center><img alt="leverup" src="up.jpg" /></center>
+<p>Now press the power ON button, select the &ldquo;roll&rdquo; option and press enter. Position the blade or tip using the arrow keys on the machine and place it over the area where you wish to cut the sticker. The origin for the machine is always the bottom left corner. Now press the origin button to home the machine.&nbsp;</p>
+<center><img alt="power" src="power.jpeg" /></center>
+        <center><img alt="origin" src="origin.jpg" /></center>
+<p>And finally click &ldquo;Send it&rdquo; to start cutting the vinyl and getting to the final step of getting your beautiful sticker.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Step 4: Holding the baby in your hands</strong></p>
+<p>After the machine finishes cutting the sticker, use a scissors to cut out the sticker. Remove the portions of the sticker that is not intended to be in the final cut using tweezers. Next, use the wide masking tape and paste a layer of it over the sticker and press down over it.&nbsp;</p>
+<p>Now, peel off the masking tape from the vinyl piece so that you will have the sticker on it. And finally paste the masking tape over the surface where you want the sticker to be and slowly remove the tape, leaving the sticker behind on the surface.&nbsp;</p>
+<center><img alt="sticker" src="sticker.jpg" /></center>
+<p>And voila! you have made your first vinyl sticker.</p>
+    </body>
+</html>
