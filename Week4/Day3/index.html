@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+        
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Pre Fab</title>
+        <meta name="description" content="Weekly assignments">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        
+        <h1>Making an Arduino ATtiny board</h1>
+       <p><strong>Learning 1</strong>- In SMD leds, the edge having the green line is cathode (negative). I had to resolder the LED on to the board.</p>
+<p>&nbsp;</p>
+<p>I uploaded the blink example code using Arduino on to the ATtiny44 board I made the other day. I had to make sure that the pin out of the ATtiny44 was compliant with that of Arduino as shown in the image here:</p>
+<p>&nbsp;</p>
+<p>Next, I tried using a button with ATtiny44. I programmed pin 6 on the board (Arduino pin 7) to be pulled up using command: pinMode(7,INPUT_PULLUP). And then used an &ldquo;if&rdquo; statement to switch an LED ON when pressing the button, and to switch it off when it is de pressed.</p>
+<p>&nbsp;</p>
+<p>Next, I was trying to get the serial communication for the tiny board setup so that I can communicate with it from my PC. I tried using the software serial example code after editing it as in the file here. But was not able to get it working even after changing the pin nos to 1,0 for RX and TX.</p>
+<p><strong>Learning 2</strong>- &nbsp;I was later able to get the Serial communication setup when Francisco pointed out that the board designed had labeled the RX and TX with respect to the FTDI cable. And serial cables are connected between RX&mdash;&gt;TX and TX&rarr;RX. So I edited the command mySerial.begin(1,0) to mySerial.begin(0,1) (RX and TX).</p>
+<p>I tried printing &ldquo;Button pressed&rdquo; through Serial, when I pressed the button on my board.</p>
+<p>And also added the code to switch ON my LED when I send a character &ldquo;1&rdquo; through Serial and to switch it OFF when I send &ldquo;0&rdquo;.</p>
+<p>&nbsp;</p>
+<p><strong>Learning 3</strong>- I noticed that when I was sending characters 1 and 0 to control the LED, at times the board wasn&rsquo;t able to detect the 1&rsquo;s I was sending. And later I found the solution to it by adding:</p>
+<p>int v;</p>
+<p>v = mySerial.read();</p>
+<p>and using &lsquo;v&rsquo; to compare the characters within &lsquo;if&rsquo;. This solved the problem which was created when I used &ldquo;if(mySerial.read()==&rsquo;1&rsquo;) to compare directly.</p>
+<p>&nbsp;</p>
+<p>Later, I also tried to start testing serial communication between two ATtiny boards. For doing this, first I soldered two pairs of wires for RX and TX to both ATtiny boards like so:</p>
+<p>&nbsp;</p>
+<p><strong>Download files</strong>: Arduino blink code, arduino button code, arduino tiny software serial code.</p>
+
+        
+        
+    </body>
+</html>

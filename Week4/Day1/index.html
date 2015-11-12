@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+        
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Pre Fab</title>
+        <meta name="description" content="Weekly assignments">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        
+        <h1>Getting started with Kokopelli</h1>
+         <p>This day we started off with Kokopelli. Curious to know the meaning of the word,I tried searching for it. And I found out that it&rsquo;s the name of a humpbacked flute player, considered as a Deity.</p>
+<p>Well here we are using Kokopelli software developed by Neil Gershenfeld for making circuit board designs. It uses a coding environment having an output window for showing a graphical representation of the code as shown here:</p>
+<center><img alt="kokopelli_screenshot" src="kokopelli.jpg"/></center>
+<p>We covered the following during the day:</p>
+<p>&bull; Installing Kokopelli<br />&bull; Opening a .cad file using it<br />&bull; Figuring out the meaning of each module (PCB parameters, components, etc)<br />&bull; Added a new set of components and drew the traces for it</p>
+<p><strong>Installing Kokopelli</strong></p>
+<p><strong>Step 1:</strong><br />To install this, first I had to download the Koko_retro.zip file from here: link.&nbsp;</p>
+
+<p><strong>Step 2:</strong><br />Next I had to install the dependencies for python using this command:&nbsp;</p>
+
+<p>sudo apt-get install python python-wxgtk2.8 python-dev python-pip gcc g++ libpng12-dev libgif-dev make bash okular libboost-thread-dev libboost-system-dev cmake&nbsp;<br />(refer: http://kokompe.cba.mit.edu/downloads.html)</p>
+
+<p><strong>Step 3:<br /></strong>And then I used this command to install numpy (refer: https://github.com/mkeeter/kokopelli/wiki/Installing)</p>
+<center><img alt="numpy" src="numpy.jpg"/></center>
+<p>sudo pip install numpy PyOpenGL PyOpenGL_accelerate</p>
+<p><strong>Step 5:<br /></strong>Next, I unzipped the koko_retro.zip file and navigated to the newly created folder from the terminal and used the following commands:</p>
+<p>make clean</p>
+<p>make fab</p>
+<p>sudo make install</p>
+<p>and then to launch the program: kokopelli &ndash;r</p>
+<center><img alt="home" src="home.jpg"/></center>
+<p><strong>Problems faced<br /></strong>When launching the software, I noticed that the circle was not appearing on the graphical interface and made me aware that it was not installed correctly. After which, we tried using this command: sudo make install in the folder of the install, which solved the problem. A screenshot of the problem:</p>
+<center><img alt="problem" src="problem.jpg"/></center>
+<p><strong>Editing a design</strong></p>
+<p>First download this .cad file from here:<a href="http://academy.cba.mit.edu/classes/embedded_programming/hello.ftdi.44.cad"> link</a> </p>
+<p>And then open the file from Kokopelli.<br />
+    <center><img alt="kokopelli" src="kokopelli.jpg"/></center>
+    To output the version of the file we want (traces, outline, circuit design, etc). We only use the first three versions of the file. Always put .png when exporting files.</p>
+<p># uncomment for desired output:&nbsp;<br />#output = "traces, labels, and exterior"&nbsp;<br />#output = "traces and exterior"&nbsp;<br />#output = "interior"&nbsp;<br />#output = "exterior"&nbsp;<br />#output = "traces"<br />#output = "holes"&nbsp;<br />#output = "solder mask"</p>
+<p>Just uncomment the kind of output you want from the above lines (line no: 21)</p>
+<center><img alt="para" src="para.jpg"/></center>
+<p>And to edit the width of the board and other parameters, go to line 3595. You can edit these lines to change the dimensions and other parameters:</p>
+<p>w = .016&nbsp;<br />width = 1&nbsp;<br />height = .93&nbsp;<br />mask = .004&nbsp;<br />x = 1&nbsp;<br />y = 1&nbsp;<br />z = -.005&nbsp;<br />d = .06 &nbsp;<br />pcb = PCB(x,y,width,height,mask)</p>
+<center><img alt="dimens" src="dimens.jpg"/></center>
+<p>&bull; Adding a LED</p>
+<p>&bull; Adding a Resistor</p>
+<p>&bull; Drawing traces</p>
+<p>&bull; Points to connect traces</p>
+<center><img alt="led" src="led.jpg"/></center>
+        <p><strong>Download files</strong>: <a href="helloworld.cad"/>helloworld.cad</a></p>
+
+        
+        
+    </body>
+</html>
