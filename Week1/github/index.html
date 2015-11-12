@@ -11,9 +11,25 @@
     <body>
         
         <h1>Setting up a website using Github</h1>
-         <p>
-           Will be addding the instructions for setting up a website using Github.
-        </p>
+                   
+        <p>A very easy way to set up a website is using Github. Using this platform we can take advantage of revision control as well as host our website through it. In order to begin making a website, first an account needs to be created with Github: <a href="https://github.com" target="_blank">https://github.com</a>.</p>
+        <center><img alt="signin" src="signin.jpg"/></center>
+        <p>Then, use this tutorial: <a href="https://help.github.com/articles/set-up-git/">https://help.github.com/articles/set-up-git/</a> to setup git in your PC if you don&rsquo;t have it. I am then using this tutorial: <a href="https://pages.github.com/">link</a> as a reference to setup the webpage.
+<p><strong>Step 1<br /></strong>Next, create a repository using your username. For example if your username is &ldquo;arvindsanjeev&rdquo;, create a repository called &ldquo;arvindsanjeev.github.io&rdquo;.</p>
+        <center><img alt="rep" src="newrep.jpg"/></center>
+        <center><img alt="arvind" src="arvind.jpg"/></center>
+<p>After that create a new folder in your PC which will hold the new cloned repository.</p>
+      
+<p><strong>Step 2</strong><br />Next, open the terminal in your PC and navigate to the newly created folder. Use the command: git clone &ldquo;repository_link&rdquo; to clone the new repository. Edit the command to include the link of your repository. A new folder having the name of the repository will be created, example: arvindsanjeev.github.io.</p>
+        <center><img alt="link" src="link.jpg"/></center>  
+        <center><img alt="term" src="term.jpg"/></center>
+<p><strong>Step 3<br /></strong>Now copy all the html files you have into the cloned folder. Use these commands to push the files for the first time:</p>
+<p>git add --all<br />git commit &ndash;m &ldquo;Initial commit&rdquo;<br />git push &ndash;u origin master</p>
+<p>And then check the new webpage by going to the link: https://&ldquo;username&rdquo;.github.io. For example: https://arvindsanjeev.github.io</p>
+<p>And then each time the files are edited, use these commands to push the new changes:</p>
+<p>git pull<br />git add .<br />git commit &ndash;m &ldquo;commit name&rdquo;<br />git push</p>
+        <p>To edit and create a website in html, I am using the tool: <a href="http://brackets.io/">Brackets</a>.</p>
+<p>&nbsp;</p>
        
         
     </body>
