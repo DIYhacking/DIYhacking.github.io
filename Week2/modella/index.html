@@ -10,12 +10,12 @@
     </head>
     <body>
         
-        <h1>Milling PCBs and 3D designs using a Modela</h1>
+        <h1>Milling PCBs using a Modela</h1>
          <p>
-           This page takes you through the process of milling PCBs and 3D designs using a Roland Modela MDX-20.
+           This page takes you through the process of milling PCBs using a Roland Modela MDX-20.
         </p>
         <center><img alt="modela" src="modella.jpg" /></center>
-        <p>The Modella is one of the most used machines in our FabLab. Its a tiny desktop CNC that can mill PCBs, create 3D models on wax and even scan in 3D. It is preferred for making PCBs using FR-1 copper boards as it doesn&rsquo;t leave any chemical wastes. But do not use it to mill FR-4 boards as it creates a lot of dust from fibre glass and which is toxic when it is inhaled.</p>
+        <p>The Modela is one of the most used machines in our FabLab. Its a tiny desktop CNC that can mill PCBs, create 3D models on wax and even scan in 3D. It is preferred for making PCBs using FR-1 copper boards as it doesn&rsquo;t leave any chemical wastes. But do not use it to mill FR-4 boards as it creates a lot of dust from fibre glass and which is toxic when it is inhaled. Here, I am going to be taking you through the process of how I milled a <strong>FabISP</strong> board on the modela.</p>
 <p>To become an expert in using the machine, you need to know the exact drill bits you need to use with the machine. They are classified based on their ends (flat end/ball end), their number of flutes (2/4) and their diameter. Parameters of a drill bit based on the picture below:&nbsp;</p>
 <center><img alt="bit" src="bit.png" /></center>
 <p>⅛ in - Diameter (3.175 mm)<br />2 FL - 2 flutes<br />BN - Ball Nose<br />Length - Short (regular)</p>
@@ -37,51 +37,47 @@
     <centre><img alt="block" src="block.jpg" /></centre>
     In order to create a PCB the process starts by designing it using a design software like Eagle. Here, you first draw the schematic and then create the board layout for the same. After doing this, the design is exported in the form of a .png file from the software having white traces.The file is then opened using fab modules and fed to the Roland Modela MDX 20 machine for milling the PCB.</p>
 <p><strong>Step 1: Creating the design file</strong></p>
-<p>To do this you need to use softwares like Eagle to design and create the board layout for your PCB. You will get a .png exported design file like so:</p>
+<p>To do this you need to use softwares like Eagle to design and create the board layout for your PCB. You will get a .png exported design file like so from the software: (not to scale)</p>
 <centre><img alt="circuit" src="circuit.png" /></centre>
+        <p>The original files used for this can be found at the bottom of the page.</p>
 <p><strong>Step 2: Using the Fab Modules</strong></p>
-<p>Fab modules is a software interface prepared to talk to all the machines in a Fab Lab. It has been created in the hope to eliminate all middle ware required to be used to talk to each of the machine in the lab.</p>
-<p>If you do not have Fab modules installed in your linux PC, you can check out this tutorial for doing it: link.</p>
-<p>After installing the Fab modules, next select input and select file type as &ldquo;.png&rdquo; and the output as &ldquo;Roland Modela MDX-20&rdquo;. Load the circuit design file and click on &ldquo;Make&rdquo;.&nbsp;</p>
-<p>&nbsp;</p>
-<p>Select the default parameters for a 1/64&rdquo; mill bit and other parameters for Diameter: 0.4 and Offset (which is the number of passes it goes around the circuit trace to remove the material) with a value of 4. If you use -1 as the offset, the mill removes all the material except for the traces.</p>
-<p>&nbsp;</p>
-<p>Now, click on &ldquo;Make path.&rdquo;</p>
-<p>&nbsp;</p>
+<p>Fab modules is a software interface prepared to talk to all the machines in a Fab Lab. It has been created in the hope to eliminate all middle ware required to be used to talk to each of the machine in the lab. If you do not have Fab modules installed in your linux PC, you can check out this tutorial for doing it: <a target="_blank" href="http://fabacademy.org/archives/content/tutorials/General_Machine_Tutorials/Fab_Modules/Installing_Updating_Fab_Modules.html">link</a>.</p>
+        <p>After installing the Fab modules, next select input and select file type as &ldquo;.png&rdquo; and the output as &ldquo;Roland Modela MDX-20&rdquo;.</p> 
+        <center><img alt="fabmod" src="fabmod.jpg"/></center>
+        <p>Load the circuit design file and click on "make_png_rml"</p>
+
+<p>Select the default parameters for a 1/64&rdquo; mill bit and other parameters for Diameter: 0.4 and Offset (which is the number of passes it goes around the circuit trace to remove the material) with a value of 4. If you use -1 as the offset, the mill removes all the material except for the traces. And then click on "make .path"</p>
+<center><img alt="settings" src="settings.jpg"/></center>
 <p><strong>Step 3: Place the copper board on the plate</strong></p>
 <p>Use two strips of double sided tape to firmly fix the copper board on top of the sacrificial layer.</p>
-<p>&nbsp;</p>
+<center><img alt="boards" src="board.jpeg"/></center>
 <p><strong>Step 4: Preparing the machine for milling</strong></p>
-<p>Make sure the mill bit on the machine is 1/64 else replace it with the correct bit by loosening the nut on the head using an Allen key. After this, switch ON the machine.&nbsp;</p>
-<p>&nbsp;</p>
+<p>Make sure the mill bit on the machine is 1/64 else replace it with the correct bit by loosening the nut on the head using an Allen key. After this, switch ON the machine.</p>
+<center><img alt="bitchange" src="bitchange.jpg"/></center>
 <p>You need to home the machine or set the origin point for the milling operation to start from. To mill the PCB on the required portion of the board, move the drill bit by editing the Xmin and Ymin values on Fab modules and clicking on &ldquo;Move&rdquo;.</p>
-<p>&nbsp;</p>
-<p>Next step is to set the origin point for the Z axis. To do this, bring the milling bit down by pressing the &ldquo;Down arrow&rdquo; button on the machine till it almost reaches the board and then loosen the bit using the Allen key. The bit should slowly fall down and touch the surface of the board, after which the mill bit should be tightened by using the Allen key.&nbsp;</p>
-<center><img alt="down" src="down.jpg" /></center>
+<center><img alt="move" src="move.jpg"/></center>
+<p>Next step is to set the origin point for the Z axis. To do this, bring the milling bit down by pressing the &ldquo;Down arrow&rdquo; button on the machine till it almost reaches the board and then loosen the bit using the Allen key.</p> 
+    <center><img alt="down" src="down.jpg" /></center>
+        <p>The bit should slowly fall down and touch the surface of the board, after which the mill bit should be tightened by using the Allen key.</p>
+        <center><img alt="zaxis" src="zaxis.jpg"/></center>
+        <ul>Two things to keep in mind while doing this are:
+            <li>The height of the exposed shaft should be the minimum. Else this will result in inaccurate milling due to bending of the bit.</li>
+            <li>The gap between the spindle head and chassis of the machine should be greater than the thickness of the milling board. As shown below:</li>
+            </ul>
+<center><img alt="gap" src="gap.jpg"/></center>
 <p><strong>Step 5: Milling the board</strong></p>
 <p>Click on the &ldquo;Make .rml&rdquo; button and send the machine file to the Modela by clicking on &ldquo;Send It!&rdquo;. After which the machine will start milling and removing copper from around the traces.&nbsp;</p>
 <center><img alt="milling" src="milling.jpg" /></center>
 <p>Click on the &ldquo;View&rdquo; button on the machine to pause the milling and see the progress on the board. To resume, press on &ldquo;View&rdquo; again.</p>
 <centre><img alt="buttons" src="buttons.jpg" /></centre>
 <p><strong>Step 6: Cutting out the board</strong></p>
-<p>After milling the board, the milled portion should be cut off from the remaining board using the Modela. To do this first the mill bit should be replaced with a 1/32&rdquo; one. Loosen the nut on the head and replace the bit.</p>
-<p>&nbsp;</p>
-<p>Next, the outline for the cut should be loaded as a .png file using Fab modules, something that looks like the figure below. It should be of the exact dimension of your PCB.&nbsp;</p>
+<p>After milling the board, the milled portion should be cut off from the remaining board using the Modela. To do this, first the mill bit should be replaced with a 1/32&rdquo; one. Loosen the nut on the head and replace the bit.</p>
+<p>Next, the outline for the cut should be loaded as a .png file using Fab modules, something that looks like the figure below (not to scale). It should be of the exact dimension of your PCB.&nbsp;</p>
 <center><img alt="outline" src="outline.png" /></center>
 <p>Now change the setting on the Fab modules to 1/32 for cutting, click on &ldquo;Make path&rdquo; and then &ldquo;Make .rml&rdquo;. Be careful to not change the origin for the machine and then click on &ldquo;Send It!&rdquo; to cut the PCB.</p>
-<p>&nbsp;</p>
-<p>After milling, you will be able to remove the PCB from the board and be careful to not touch the surface traces as it would make soldering a lot more difficult.</p>
-        <p><strong>3D milling on the Modela</strong></p>
-<p>The Modela can also be used to mill 3D moulds on wax blocks for moulding and casting. To mill 3D models on the Modela, first take the 3D design file created using design softwares like Rhino and which has been modeled on the same dimensions as that of a wax block you would be using.</p>
-<p>&nbsp;</p>
-<p>Place the wax block on the surface plate of the machine using double side tape and replace the mill bit with a ball nose end bit.&nbsp;</p>
-<p>Open Fab modules and select input as an .stl file and output format as Roland Modela MDX-20.</p>
-<p>Load the .stl design file and select 1/8 wax rough. Click on &ldquo;Make .png&rdquo; with stl unit: 1.0. Set the origin point of the machine as the bottom left corner.</p>
-<p>Click on &ldquo;Send It!&rdquo;.&nbsp;</p>
-<p>&nbsp;</p>
-<p>The machine starts removing the wax slowly and is a lengthy process, and once it finishes you will notice that the finish of the surface is not good. And so the next step is to select the wax smooth cut option from the Fab modules software and initiate it. This process is also lengthy and after which you will obtain a much finished version of your design than earlier.</p>
-<p>&nbsp;</p>
-       
-        
+<center><img alt="32" src="32.jpg"/></center>
+<p>After milling, you will be able to remove the PCB from the board and be careful to not touch the surface traces as it would make soldering a lot more difficult. I got something like this after the milling:</p>
+       <center><img alt="fabisp" src="fabisp.jpg"/></center>
+        <p><strong>Download files:</strong> <a href="hello.ISP.44.traces.png">fabISPtraces.png</a>, <a href="hello.ISP.44.png">fabISPinfo.png</a> and <a href="hello.ISP.44.cutout.png">fabISPoutline.png</a></p>     
     </body>
 </html>
