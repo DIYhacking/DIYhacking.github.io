@@ -11,49 +11,66 @@
     <body>
         
         <h1>Working with the ShopBot</h1>
-         <p><strong>ShopBot</strong></p>
+         <center><img alt="shopbot" src="Shopbot.jpg"/></center>
 <p>The Shopbot is a CNC that can cut materials like wood, acrylic and even soft metals. Based on the design, you can cut 2D and 3D files. In order to use the machine, three different software components are used:</p>
 <p>1. A design software like Rhino to model 2D or 3D shapes.<br />2. Vcarve pro software to create the toolpath for the machine.<br />3. Shopbot software to set the origin for the machine and feed the toolpath file.</p>
         <center><img alt="block" src="block.jpg"/></center>
 <p>In order to cut a 2D design file on the Shopbot, you need to follow the steps below:</p>
 <p><strong>Step 1: Creating the toolpath for the machine</strong></p>
-<p>Assuming, you have a 2D design file (if you don&rsquo;t, then you can make one in Rhino and export it as a .dxf file), you need to open it inside the Vcarve Pro software. Upon opening, set the size of the material based on the available dimensions available on the board you are cutting. The material thickness is taken as <strong>14mm</strong> (depending on the plywood sheet). And be careful to uncheck the &ldquo;offset&rdquo; option and set the origin as the left bottom corner:</p>
-<p>&nbsp;</p>
-<p>We are going to be doing primarily three operations: Drilling, pocket and profile.</p>
-<p>&nbsp;</p>
+        <center><img alt="rhino" src="rhino.jpg"/></center>
+<p>Assuming, you have a 2D design file (if you don&rsquo;t, then you can make one in Rhino and export it as a .dxf file), you need to open it inside the Vcarve Pro software. Upon opening, set the size of the material based on the available dimensions available on the board you are cutting. The material thickness is taken as <strong>12mm</strong> (depending on the plywood sheet). And be careful to uncheck the &ldquo;offset&rdquo; option and set the origin as the left bottom corner:</p>
+<center><img alt="vacrve" src="vcarve.jpg"/></center>
+<p>There are primarily three operations that can be done using the ShopBot: Drilling, pocket and profile.</p>
 <p><strong>Drill</strong></p>
-<p>First we start with the Drill operation to mark the holes for the portions which we want to drill down using screws, so that they are firmly held in place. Use the circle tool to draw circles of diameter 3mm on opposite sides of each piece of the design. And then select only the circles drawn and click on the &ldquo;Toolpath&rdquo; option on the top right corner and pin it down so that it doesn&rsquo;t move. Set the Start depth as 0 and Cut depth as 4mm. And from the Tool End section, click on &ldquo;Select&rdquo;.</p>
-<p>&nbsp;</p>
-<p>Set the diameter for the tool as 6.35mm and the Pass Depth (the depth at which each cut is done) as 3.5mm. The Spindle Speed can be set to 12,000 rpm and you can use higher speeds for better finish.</p>
-<p>&nbsp;</p>
+<p>First we start with the Drill operation to mark the holes for the portions which we want to drill down using screws, so that they are firmly held in place. Use the circle tool to draw circles of diameter 3mm on opposite sides of each piece of the design.</p>
+        <center><img alt="circles" src="circles.jpg"/></center>
+        <p>And then select only the circles drawn and click on the &ldquo;Toolpath&rdquo; option on the top right corner and pin it down so that it doesn&rsquo;t move. Set the Start depth as 0 and Cut depth as 4mm. And from the Tool End section, click on &ldquo;Select&rdquo;.</p>
+<p>Set the diameter for the tool as <strong>6.35mm</strong> and the Pass Depth (the depth at which each cut is done) as <strong>3.5mm</strong>. The Spindle Speed can be set to <strong>12,000 rpm</strong> and you can use higher speeds for better finish.</p>
 <p>Now click on &ldquo;Preview selected toolpath&rdquo; to watch the simulation of the drilling being done on the material. Next, click on the &ldquo;Save&rdquo; button to save the toolpath.</p>
-<p>&nbsp;</p>
 <p><strong>Pocket</strong></p>
-<p>Next, select the circular portion of the design of which you want to remove only the top few layers and unselect everything else. Click on the &ldquo;Pocket&rdquo; button and set the cut depth to 8mm. Set the stepover (radius of the smallest circle of which the machine removes the material) as 1.5mm.</p>
-<p>&nbsp;</p>
+<p>Next, select the circular portion of the design of which you want to remove only the top few layers and unselect everything else. Click on the &ldquo;Pocket&rdquo; button and set the cut depth to <strong>8mm</strong>. Set the stepover (radius of the smallest circle of which the machine removes the material) as <strong>1.5mm</strong>.</p>
 <p>Then click on &ldquo;Preview selected toolpath&rdquo; to view the simulation of the engraving or material removal. If you are satisfied, click on the Save button to save the toolpath.</p>
-<p>&nbsp;</p>
 <p><strong>Profile</strong></p>
-<p>This operation is used to cut a portion of the material from the whole board. Select the lines which you wish to cut and click on the Profile button. Set the Cut Depth to 14mm and Pass depth from the tool select menu to be 3.5mm. Make sure to switch the Machine Vectors to ON.</p>
-<p>&nbsp;</p>
-<p>And also add tabs to the cut, to prevent the material from jerking in the machine. Set the length: 5mm, thickness: 7mm and click on edit tabs to add the tabs manually on the shape.</p>
+        <center><img alt="tools" src="tools.jpg"/></center>
+        <p>This operation is used to cut a portion of the material from the whole board. Select the lines which you wish to cut and click on the Profile button. Set the Cut Depth to <strong>14mm</strong>.</p> 
+        <center><img alt="cut" src="cut.jpg"/></center>
+        <p>Next, set the Pass depth from the tool select menu to be <strong>3.5mm or 2mm</strong> depending on the finish or the speed at which you want the operation to be over. Make sure to switch the Machine Vectors to ON.</p>
+<center><img alt="bitset" src="bitset.jpg"/></center>
+<p>And also if needed add tabs to the cut, to prevent the material from jerking in the machine. Set the length: <strong>5mm</strong>, thickness: <strong>7mm</strong> and click on edit tabs to add the tabs manually on the shape. You can then later view the preview for the operation on the ShopBot, like a simulation.</p>
+        <center><img alt="preview" src="preview.jpg"/></center>
 <p>Now, make sure to save the drill toolpath separately and the pocket and profile toolpaths together (by selecting the pocket and profile toolpaths and saving them together). The order for doing it should be: Drill&rarr; Pocket &rarr; Profile.</p>
-<p>&nbsp;</p>
+        <center><img alt="save" src="save.jpg"/></center>
 <p><strong>Step 2: Setting up the machine</strong></p>
-<p>Place the material you wish to use on top of the sacrificial layer and screw it down using power drills. Next, power ON the machine by switching ON the main power supply and the control board switch. Check to see if any of the emergency stops are engaged, release them if they are.</p>
-<p>&nbsp;</p>
-<p>In order to change the mill bits, you need to loosen the board above the spindle and let the brush cover slide down. Move it out of the way and then use the spanner and cullet tool (attached to the key on the control box to prevent accidental turning ON of the spindle) to loosen the mill bit. Pull them together to loosen and apart to tighten. Remove the cullet and mill bit and replace it with the new bit. Next, tighten the mill bit onto the spindle and place the brush cover back.&nbsp;</p>
-<p>&nbsp;</p>
-<p>Now open the ShopBot software and use the arrow keys to move the spindle to the portion where you wish to cut. The origin for the machine is the bottom left corner when viewed in the foll orientation:&nbsp;</p>
-<p>Click on the [Z]ero option from the toolbar on top and click X and Y axes. Move the spindle head to the portion which you want to set as the origin and click on Zero axes button and check X and Y axes.</p>
-<p>&nbsp;</p>
-<p>Next, you need to set the Z axis origin. To do this, click on the Z axis option from the [Z]ero toolbar dropdown and follow the instructions. Remove the steel plate from the spindle block and clip the alligator clip on to the cullet. Place the steel plate below the mill bit and click &ldquo;OK&rdquo; on the dialog box that asks you to do this.</p>
-<p>&nbsp;</p>
+        <p>Before using the machine, first you need to understand its orientation. This is required in order to correctly align the design in the area of the material where you wish to cut. The longer axis of the machine is X and shorter one is Y. Like in figure below:</p>
+        <center><img alt="axes" src="axes.jpg"/></center>
+<p>Place the material you wish to use on top of the sacrificial layer and screw it down using power drills (impact drill).</p> 
+        <center><img alt="drills" src="drills.jpg"/></center>
+        <p>Next, power ON the machine by switching ON the main power supply and the control board switch. Check to see if any of the emergency stops are engaged, release them if they are.</p>
+<center><img alt="switches" src="switches.jpeg"/></center>
+        <ol>In order to change the mill bits, you need to do the following:
+        <li>Loosen the board above the spindle and let the brush cover slide down, then move it out of the way.</li>
+            <li>Use the spanner and cullet tool (attached to the key on the control box, to prevent accidental turning ON of the spindle) to loosen the mill bit. Pull them together to loosen and apart to tighten.</li>
+            <li>And then  Remove the cullet and mill bit and replace it with the new bit. Next, tighten the mill bit onto the spindle and place the brush cover back.</li>
+        </ol>
+        <center><img alt="bitone" src="bitone.jpeg"/></center>
+        <center><img alt="bit two" src="bittwo.jpeg"/></center>
+ 
+
+<p>Now open the ShopBot software and use the arrow keys to move the spindle to the portion where you wish to cut. The origin for the machine is the bottom left corner (check first image of step two)</p>
+        <center><img alt="move" src="move.jpeg"/></center>
+<p>Click on the [Z]ero option from the toolbar or the ZeroAxes button from the console and click X and Y axes. Move the spindle head to the portion which you want to set as the origin and click on Zero axes button and check X and Y axes. And close the move console.</p>
+<center><img alt="zerox" src="zerox.jpg"/></center>
+<p>Next, you need to set the Z axis origin. To do this, click on the Z axis option from the [Z]ero toolbar dropdown and follow the instructions. Remove the steel plate from the spindle block and clip the alligator clip on to the cullet. Place the steel plate below the mill bit and click &ldquo;OK&rdquo; on the dialog box that asks you to do this (follow the figures below).</p>
+<center><img alt="z1" src="z1.jpg"/></center>
+        <center><img alt="zax" src="zz.jpeg"/></center>
 <p>The machine makes the spindle move down and the mill bit touches the plate, this happens two times in order to figure out the exact Z axis height. After this, remove the alligator clip and place the metal plate back to its earlier position.</p>
-<p>&nbsp;</p>
 <p>Now, we are ready to cut the part. Click on &ldquo;CUT PART&rdquo; and open the first drill toolpath that was created through Vcarve Pro. Press the REST button on the machine to reset it and press START button when the computer asks you to. The spindle starts and begins drilling the paths, turn on the Vacuum pump to suck the dust from the machine.</p>
-<p>After it completes, drill screws through the parts using the hand drill. And then repeat the same steps for cutting the part by loading the next toolpath file for the pocket and profile operations and wait for the completion.</p>
-<p>&nbsp;</p>
+        <center><img alt="cutting" src="cutting.jpeg"/></center>
+<p>After it completes, drill screws through the parts using the hand drill. And then repeat the same steps for cutting the part by loading the next toolpath file for the pocket and profile operations and wait for the completion. A product obtained after completing the three operations:</p>
+<center><img alt="finish" src="finish.jpg"/></center>
+        <p>The product obtained frrom my design file:</p>
+        <center><img alt="finish2" src="finish2.jpg"/></center>
+        <p><strong>Download files:</strong> <a href="boxCutNEW.dxf">BoxCut.dxf</a>, <a href="boxCut.3dm">BoxCut.3dm</a></p> 
        
        
         
