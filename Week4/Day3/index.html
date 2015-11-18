@@ -10,28 +10,93 @@
     </head>
     <body>
         
-        <h1>Making an Arduino ATtiny board</h1>
-       <p><strong>Learning 1</strong>- In SMD leds, the edge having the green line is cathode (negative). I had to resolder the LED on to the board.</p>
-<p>&nbsp;</p>
-<p>I uploaded the blink example code using Arduino on to the ATtiny44 board I made the other day. I had to make sure that the pin out of the ATtiny44 was compliant with that of Arduino as shown in the image here:</p>
-<p>&nbsp;</p>
-<p>Next, I tried using a button with ATtiny44. I programmed pin 6 on the board (Arduino pin 7) to be pulled up using command: pinMode(7,INPUT_PULLUP). And then used an &ldquo;if&rdquo; statement to switch an LED ON when pressing the button, and to switch it off when it is de pressed.</p>
-<p>&nbsp;</p>
-<p>Next, I was trying to get the serial communication for the tiny board setup so that I can communicate with it from my PC. I tried using the software serial example code after editing it as in the file here. But was not able to get it working even after changing the pin nos to 1,0 for RX and TX.</p>
-<p><strong>Learning 2</strong>- &nbsp;I was later able to get the Serial communication setup when Francisco pointed out that the board designed had labeled the RX and TX with respect to the FTDI cable. And serial cables are connected between RX&mdash;&gt;TX and TX&rarr;RX. So I edited the command mySerial.begin(1,0) to mySerial.begin(0,1) (RX and TX).</p>
+        <h1>Making an Arduino based ATtiny board</h1>
+       <p><strong>Learning 1</strong>- In SMD leds, the edge having the green line is cathode (negative). I had to resolder the LED on to the board since the polarity was reversed.</p>
+<center><img alt="smd" src="smd.jpg"/></center>
+<p>I uploaded the blink example code using Arduino on to the ATtiny44 board I made the other day (all the programs created can be found embedded in this page). I had to make sure that the pin out of the ATtiny44 was compliant with that of Arduino as shown in the image here:</p>
+<center><img alt="attiny" src="ATtiny44-84.png"/></center>
+<p>The program was successfully uploaded on to the board through the FabISP using the following settings:</p>
+        <ul><li>Board: ATtiny</li>
+<li>Processor: ATtiny 44</li>
+<li>Clock: 20 MHz (external)</li>
+<li>Programmer: USB Tiny ISP</li></ul>
+        <center><img alt="blink1" src="blink1.jpeg"/></center>
+        <p>The code for blinking an LED:</p>
+        <pre><code>
+void setup() {
+  // initialize digital pin 8 as an output.
+  pinMode(8, OUTPUT);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  digitalWrite(8, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(1000);              // wait for a second
+  digitalWrite(8, LOW);    // turn the LED off by making the voltage LOW
+  delay(1000);              // wait for a second
+}</code></pre>
+
+        <p>Next, I tried using a button with ATtiny44. I programmed pin 6 on the board (Arduino pin 7) to be pulled up using command: <strong>pinMode(7,INPUT_PULLUP)</strong>. And then used an &ldquo;if&rdquo; statement to switch an LED ON when pressing the button, and to switch it off when it is de pressed.</p>
+<center><img alt="button" src="button.jpg"/></center>
+<p>The code:</p>
+<pre><code>void setup() {
+  // initialize digital pin 13 as an output.
+  pinMode(8, OUTPUT);
+  pinMode(7,INPUT_PULLUP);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+ if(digitalRead(7)==LOW)
+  digitalWrite(8,HIGH);
+ else digitalWrite(8,LOW);
+  delay(500);
+  }
+</code></pre>
+<p>Next, I was trying to get the serial communication for the tiny board setup so that I can communicate with it from my PC. I tried using the software serial example code from File-->Examples-->SoftwareSerial. But was not able to get it working even after changing the pin nos to 1,0 for RX and TX.</p>
+<p><strong>Learning 2</strong>- &nbsp;I was later able to get the Serial communication setup when Francisco pointed out that the board was designed having the RX and TX with respect to the FTDI cable. And serial cables are connected between RX&mdash;&gt;TX and TX&rarr;RX. So I edited the command <strong>mySerial.begin(1,0)</strong> to <strong>mySerial.begin(0,1)</strong> (RX and TX).</p>
 <p>I tried printing &ldquo;Button pressed&rdquo; through Serial, when I pressed the button on my board.</p>
 <p>And also added the code to switch ON my LED when I send a character &ldquo;1&rdquo; through Serial and to switch it OFF when I send &ldquo;0&rdquo;.</p>
-<p>&nbsp;</p>
-<p><strong>Learning 3</strong>- I noticed that when I was sending characters 1 and 0 to control the LED, at times the board wasn&rsquo;t able to detect the 1&rsquo;s I was sending. And later I found the solution to it by adding:</p>
-<p>int v;</p>
-<p>v = mySerial.read();</p>
-<p>and using &lsquo;v&rsquo; to compare the characters within &lsquo;if&rsquo;. This solved the problem which was created when I used &ldquo;if(mySerial.read()==&rsquo;1&rsquo;) to compare directly.</p>
-<p>&nbsp;</p>
-<p>Later, I also tried to start testing serial communication between two ATtiny boards. For doing this, first I soldered two pairs of wires for RX and TX to both ATtiny boards like so:</p>
-<p>&nbsp;</p>
-<p><strong>Download files</strong>: Arduino blink code, arduino button code, arduino tiny software serial code.</p>
+<center><img alt="serial1" src="serial1.jpg"/></center>
+<p><strong>Learning 3</strong>- I noticed that when I was sending characters 1 and 0 to control the LED, at times the board wasn&rsquo;t able to detect the 1&rsquo;s I was sending. And later I found the solution to it by initializing an int variable to hold the serial characters:</p>
+        <p><strong>int v;</strong></br>
+<strong>v = mySerial.read();</strong></p>
+<p>and using &lsquo;v&rsquo; to compare the characters within &lsquo;if&rsquo;. This solved the problem which was created when I used &ldquo;<strong>if(mySerial.read()==&rsquo;1&rsquo;)</strong> to compare directly. The code:</p>
+<div style="overflow: auto; height: 400px;">
+<pre><code><xmp>#include <SoftwareSerial.h>
+int v;
+SoftwareSerial mySerial(0,1); // RX, TX
 
-        
+void setup() {
+  // Open serial communications and wait for port to open:
+  // set the data rate for the SoftwareSerial port
+  mySerial.begin(4800);
+  pinMode(7,INPUT_PULLUP);
+  pinMode(8, OUTPUT);
+}
+
+void loop() { // run over and over
+v=mySerial.read();
+if(digitalRead(7)==LOW)
+{
+  mySerial.println("Button pressed");
+  delay(200);
+}
+
+if(v=='1')
+{
+  digitalWrite(8,HIGH);
+}
+
+if(v=='2')
+{
+  digitalWrite(8,LOW);
+}
+}
+</xmp></code></pre>
+</div>
+<p>Later, I also tried to start testing serial communication between two ATtiny boards. For doing this, first I soldered two pairs of wires for RX and TX to both ATtiny boards like so:</p>
+<center><img alt="solder" src="solder.jpg"/></center>
         
     </body>
 </html>

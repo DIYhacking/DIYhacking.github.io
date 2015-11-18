@@ -11,13 +11,14 @@
     <body>
         
         <h1>Getting started with Kokopelli</h1>
-         <p>This day we started off with Kokopelli. Curious to know the meaning of the word,I tried searching for it. And I found out that it&rsquo;s the name of a humpbacked flute player, considered as a Deity.</p>
+         <p>This day we started off with Kokopelli. Curious to know the meaning of the word,I tried searching for it. And I found out that it&rsquo;s the name given to a humpbacked flute player, considered as a fertility Deity.</p>
+        <center><img alt="koko" src="koko.jpg"/></center>
 <p>Well here we are using Kokopelli software developed by Neil Gershenfeld for making circuit board designs. It uses a coding environment having an output window for showing a graphical representation of the code as shown here:</p>
 <center><img alt="kokopelli_screenshot" src="kokopelli.jpg"/></center>
 <p>We covered the following during the day:</p>
 <p>&bull; Installing Kokopelli<br />&bull; Opening a .cad file using it<br />&bull; Figuring out the meaning of each module (PCB parameters, components, etc)<br />&bull; Added a new set of components and drew the traces for it</p>
 <p><strong>Installing Kokopelli</strong></p>
-<p><strong>Step 1:</strong><br />To install this, first I had to download the Koko_retro.zip file from here: link.&nbsp;</p>
+<p><strong>Step 1:</strong><br />To install this, first I had to download the Koko_retro.zip file from here: <a href="koko_retro.zip">link</a>.&nbsp;</p>
 
 <p><strong>Step 2:</strong><br />Next I had to install the dependencies for python using this command:&nbsp;</p>
 
@@ -27,10 +28,10 @@
 <center><img alt="numpy" src="numpy.jpg"/></center>
 <p>sudo pip install numpy PyOpenGL PyOpenGL_accelerate</p>
 <p><strong>Step 5:<br /></strong>Next, I unzipped the koko_retro.zip file and navigated to the newly created folder from the terminal and used the following commands:</p>
-<p>make clean</p>
-<p>make fab</p>
-<p>sudo make install</p>
-<p>and then to launch the program: kokopelli &ndash;r</p>
+<ul><li>make clean</li>
+<li>make fab</li>
+<li>sudo make install</li>
+<li>and then to launch the program: kokopelli &ndash;r</li></ul>
 <center><img alt="home" src="home.jpg"/></center>
 <p><strong>Problems faced<br /></strong>When launching the software, I noticed that the circle was not appearing on the graphical interface and made me aware that it was not installed correctly. After which, we tried using this command: sudo make install in the folder of the install, which solved the problem. A screenshot of the problem:</p>
 <center><img alt="problem" src="problem.jpg"/></center>
@@ -45,10 +46,14 @@
 <p>And to edit the width of the board and other parameters, go to line 3595. You can edit these lines to change the dimensions and other parameters:</p>
 <p>w = .016&nbsp;<br />width = 1&nbsp;<br />height = .93&nbsp;<br />mask = .004&nbsp;<br />x = 1&nbsp;<br />y = 1&nbsp;<br />z = -.005&nbsp;<br />d = .06 &nbsp;<br />pcb = PCB(x,y,width,height,mask)</p>
 <center><img alt="dimens" src="dimens.jpg"/></center>
-<p>&bull; Adding a LED</p>
-<p>&bull; Adding a Resistor</p>
-<p>&bull; Drawing traces</p>
-<p>&bull; Points to connect traces</p>
+<p>Next, I tried to do the following:</p>
+        <ul>
+      <li>Adding a LED</li>  
+<li>Adding a Resistor</li>
+<li>Drawing traces</li>
+<li>Points to connect traces</li>
+</ul>
+        <p>The coding required to do the four operations above are marked with arrows in the figure below:</p>
 <center><img alt="led" src="led.jpg"/></center>
         <p><strong>Download files</strong>: <a href="helloworld.cad"/>helloworld.cad</a></p>
 

@@ -10,11 +10,16 @@
     </head>
     <body>
         
-        <h1>Day 4 - Serial communication</h1>
-         <p>
-          Will be updated soon
-        </p>
-       
+        <h1>Serial communication between two ATtiny boards</h1>
+         <p>This day, I started off by writing the code for my RX and TX ATtiny boards to test serial communication between them. The code can be found at the bottom of the page. I then soldered a common ground connection between the two boards as so:</p>
+<p>An important thing to note is the way the RX and TX lines from each board should be connected with each other. Here, the RX of one board should be connected to the TX of the other board and the TX of the first board to the RX of the first board.</p>
+<p>&nbsp;</p>
+<p>I am using the SoftwareSerial library for ATtiny in Arduino to create a serial port for communication</p>
+<p>&nbsp;</p>
+<p>In the program, I am sending two characters &ldquo;1&rdquo; and &lsquo;&rsquo;2&rdquo; with a delay of 500 ms between the two, serially from the first board to the second board. The second board (RX) lights an LED when it receives the character &ldquo;1&rdquo; and switches off the LED when it receives the character &ldquo;2&rdquo;.</p>
+<p>&nbsp;</p>
+<p>Download files: RXtest.ino, TXtest.ino</p>
+<p>&nbsp;</p>
        
         
     </body>

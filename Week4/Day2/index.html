@@ -10,50 +10,48 @@
     </head>
     <body>
         
-        <h1>Milling a hello world board</h1>
+        <h1>Milling and programming a Hello World board</h1>
     <p>Today we started off by cleaning up the workspaces. As Francisco had mentioned, this is in order to prevent the &ldquo;Barcelona effect&rdquo; by which he means to avoid situations where people have to go on keep looking for tools and waste their time by doing so.</p>
 <p>After that, he recommended making 3D printer based designs for objects to hold:</p>
-<p>1. Filament reels tightly.</p>
-<p>2. Keep the heads of the hot gun together</p>
+<ol>
+       <li>Filament reels tightly.</li> 
+<li>Keep the heads of the hot gun together.</li></ol>
 <p>We found this file to hold 2.85mm reels tightly: <a href="http://www.thingiverse.com/thing:520205/#files" target="_blank">http://www.thingiverse.com/thing:520205/#files</a></p>
 <center><img alt="clip" src="clip.jpg"/></center>
 <p>Next, the task for the day was to design a board using Kokopelli by adding a LED and button to Neil&rsquo;s existing helloworld.cad board. And then to mill the board using Modela and solder the components on to it.&nbsp;The board was designed as so: (not to scale)</p>
 <center><img alt="circuit" src="circuit.jpg"/></center>
-        <p>Next, the board&rsquo;s traces, interior and exterior .png files were exported. (<strong>Learning 1</strong>- Make sure that the file is named with an extension .png, otherwise the export wouldn&rsquo;t work)The files were taken to the Modela and the design file was opened using FabModules. To learn more about using the Modella, check this (tutorial <a href="http://DIYhacking.github.io/Week2/modella/index.html" target="_blank">link</a>).</p>
-<p>&nbsp;</p>
-<p>Before moving on to milling the board, we noticed that the surface plate of the Modela was very dirty due to the residues from the double side tapes used on it. Therefore, it was taken out and cleaned.&nbsp;</p>
+        <p>Next, the board&rsquo;s traces, interior and exterior .png files were exported. (<strong>Learning 1</strong>- Make sure that the file is named with an extension .png, otherwise the export wouldn&rsquo;t work). The files were then taken to the Modela and the design file was opened using FabModules. To learn more about using the Modella, check this (tutorial <a href="http://DIYhacking.github.io/Week2/modella/index.html" target="_blank">link</a>).</p>
+<center><img alt="fabmod" src="fabmod.jpg"/></center>
+<p>Before moving on to milling the board, we noticed that the surface plate of the Modela was very dirty due to the residues from the double side tapes used on it. This caused the new board which I put, to be bent and unevenly affixed on top of the sacrificial layer (check the figure below). Moreover, there were two sacrificial layers already on the board which amplified any bents on it. Therefore, it was taken out and cleaned.&nbsp;</p>
 <p>A new sacrificial layer was then added using a paper protected double side tape with the copper side facing the plate.</p>
-<p>&nbsp;</p>
+<center><img alt="clean" src="clean.jpeg"/></center>
 <p>Next, I pasted the Cu board for making my circuit on top of the sacrificial layer and started milling. <strong>Learning 2</strong>- However, the mill was not good as the traces were peeling off from the surface. Thus it was concluded that the end mill was attached with too much length from the top which caused it to mill more than I wanted.</p>
-<p>&nbsp;</p>
+<center><img alt="imp1" src="imp1.jpeg"/></center>
 <p>The process was then stopped and the mill was removed and put back together making sure that the length of the mill shaft is minimally exposed and the gap between the spindle module and the chassis of the machine was decent. As shown:</p>
-<p>&nbsp;</p>
+<center><img alt="height" src="height.jpeg"/></center>
 <p>The file for the circuit design was also rotated using the Ubuntu stock photo viewing software in order to position the design on the remaining free portion of the copper board. <strong>Learning 3</strong>- Note down the dimensions of the original design before rotating and resize the newly rotated design from FabModules using the earlier noted dimensions.</p>
-<p>&nbsp;</p>
-<p>However, even after performing this, all the traces had not perfectly come through. Even though, it was much better than before. All the failed attempts at making the circuit:</p>
-<p>&nbsp;</p>
-<p><strong>Learning 4</strong>- We figured out the problem that the resolution set by default from Kokopelli was 10 and which wasn&rsquo;t enough for the machine to mill effectively. The resolution was later set to 50 and which solved the problem. And the board was obtained like so:</p>
-<p>&nbsp;</p>
+<p>However, even after performing this, all the traces had not perfectly come through. Even though, it was much better than before. The firt two attempts were diagnosed to be caused due to improper spindle length and chassis gap. However the third test attempt was succesful, the reason of which can be found by reading below. All the failed attempts at making the circuit:</p>
+<center><img alt="fails" src="fails.jpg"/></center>
+<p><strong>Learning 4</strong>- We figured out the problem that the <strong>resolution</strong> set by default from Kokopelli was <strong>10</strong> and which wasn&rsquo;t enough for the machine to mill effectively. The resolution was later set to <strong>50</strong> and which solved the problem. And the board was obtained like so:</p>
+<center><img alt="finish" src="finish.jpg"/></center>
         <p><strong>Download files</strong>: <a href="ledButton.png">LEDbutton.png</a>, <a href="traces50.png">traces.png</a>, <a href="outline50.png">exterior.png</a> and <a href="LEDbutton">.cad file</a></p>
-<p>&nbsp;</p>
-<p>Programming the ATtiny44 board<br />The board was then programmed by first burning the bootloader from Arduino by using the FabISP.</p>
+<h2>Programming the ATtiny44 board</h2>
+    <p>The board was then programmed by first burning the bootloader from Arduino by using the FabISP. You can read about the journey below.</p>
 <p>After soldering the board milled from the Modela, it looks like this:</p>
-<p>&nbsp;</p>
-<p>After that I installed Arduino 1.6.6 from the website: https://www.arduino.cc/en/Main/Donate</p>
-<p>And then also added the support for adding ATtiny44 chip to Arduino IDE. I followed the steps stated here: http://highlowtech.org/?p=1695</p>
-<p>&nbsp;</p>
-<p>After that I used my ISP made from the other day and set the following settings:</p>
-<p>Board: ATtiny</p>
-<p>Processor: ATtiny 44</p>
-<p>Clock: 20 MHz (external)</p>
-<p>Programmer: USB Tiny ISP</p>
-<p>And then plugged in my ISP and connected it to my newly created board. I was then able to &ldquo;Burn bootloader&rdquo; and successfully uploaded a sample program to the board.</p>
-<p>&nbsp;</p>
-<p>Some interesting things:</p>
-<p>The ISP I made seems to be only detected in my Mac OS, when I tried plugging it on Francisco&rsquo;s PC running Ubuntu, it was not being detected.</p>
-<p>&nbsp;</p>
+<center><img alt="solder" src="solder.jpeg"/></center>
+        <p>After that I installed Arduino 1.6.6 from the website: <a href="https://www.arduino.cc/en/Main/Donate" target="_blank">https://www.arduino.cc/en/Main/Donate</a></p>
+<p>And then also added the support for adding ATtiny44 chip to Arduino IDE. I followed the steps stated here: <a href="http://highlowtech.org/?p=1695" target="_blank">http://highlowtech.org/?p=1695</a>. After installing the support, you get to see the ATtiny board from the boards menu of arduino:</p>
+<center><img alt="arduino" src="arduino.jpg"/></center>
+        <p>After that I used my ISP made from the other day and set the following settings:</p>
+<ul><li>Board: ATtiny</li>
+<li>Processor: ATtiny 44</li>
+<li>Clock: 20 MHz (external)</li>
+<li>Programmer: USB Tiny ISP</li></ul>
+<p>And then plugged in my ISP and connected it to my newly created board. I was then able to &ldquo;Burn bootloader&rdquo; and successfully uploaded a sample program to the board. Make sure the ATtiny board you are using has an external 20MHz crystal, if it doesn't then trying to burn a program using the settings for an external crystal can break your board.</p>
+<center><img alt="isp" src="isp.jpg"/></center>
+<p>An interesting thing was that the ISP I made seems to be only detected in my Mac OS, when I tried plugging it on Francisco&rsquo;s PC running Ubuntu, it was not being detected.</p>
 <p>And correct way of making an ISP cable:</p>
-<p>&nbsp;</p>
+<center><img alt="cable" src="cable.jpg"/></center>
 <p>The ISP cable I made was shorted in one of the ends which made it not work on the first attempt.</p>
 <p>&nbsp;</p>
        
