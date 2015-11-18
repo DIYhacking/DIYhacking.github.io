@@ -12,17 +12,26 @@
         
        <h1>Designing and printing a Hot Air Gun stand</h1>
         <p>This day I started off with designing a stand for the Hot Air gun. As I felt that without it the device keeps floating around the table. So I started off by making the design in Rhino.</p>
-<p>First, I measured the dimensions for the gun using the vernier caliper and finalized the design for the stand. I wanted the hot end to be facing up as in case the power was not switched off, it wouldn&rsquo;t overheat any surfaces it is near to. Measuring:</p>
-<p>&nbsp;</p>
-<p>Next I drew a 2D outline of the stand in Rhino. I was able to do this based on the brief experience I had with it here. Furthermore, I made the curves into a surface and then extruded it to a height of 5mm. And it looked like this:</p>
-<p>&nbsp;</p>
+        <center><img alt="weller" src="weller.jpg"/></center>
+        <p>First, I measured the dimensions for the gun using the vernier caliper and finalized the design for the stand. I wanted the hot end to be facing up as in case the power was not switched off, it wouldn&rsquo;t overheat any surfaces it is near to.</p>
+<center><img alt="calliper" src="calliper.jpg"/></center>
+<p>Next I drew a 2D outline of the stand in Rhino. I was able to do this based on the brief experience I had with it. Furthermore, I made the curves into a surface and then extruded it to a height of <strong>5mm</strong>. And it looked like this:</p>
+<center><img alt="rhino1" src="rhino1.jpg"/></center>
 <p>Later, Francisco recommended on adding triangular support to the holders to make it more robust. I did this by drawing the outline for the structure, then turned it into a surface and then did a Boolean union to close the whole design into a closed poly surface. It looks like this:</p>
-<p>&nbsp;</p>
-<p>After this, I exported the file in the .stl format and opened it in Cura. The preview of it looks like this:</p>
-<p>&nbsp;</p>
+<center><img alt="triang" src="triang.jpg"/></center>
+<p>After this, I exported the file in the .stl format and opened it in Cura. I downloaded the software from here:<a href="https://ultimaker.com/en/products/cura-software" target="_blank">https://ultimaker.com/en/products/cura-software</a>. The preview of it looks like this:</p>
+<center><img alt="cura" src="cura.jpg"/></center>
 <p>I then chose the advanced settings option and double checked for these parameters:</p>
-<p>&nbsp;</p>
-<p>Printing on the 3D printer</p>
-        
+<center><img alt="settings" src="settings.jpg"/></center>
+        <p><strong>Download files:</strong> <a href="HotAirGun.3dm">HotAirGun.3dm</a>, <a href="HotAirGun.gcode">HotAirGun.gcode</a>, <a href="HotAirGun.stl">HotAirGun.stl</a></p>
+   <h2>Printing on the 3D printer</h2>
+    <p>First I loaded the exported .gcode file into the SD card of the Ultimaker. And inserted it into the 3D printer. Next, I selected &ldquo;Print&rdquo; and chose the file from the card.</p>
+<center><img alt="print" src="print.jpeg"/></center>
+<p>After that, the printer started heating the extruder and after sometime started printing. However, I noticed that after the first few lines, the filament was no longer continuously extruding from the machine.&nbsp;</p>
+<center><img alt="error" src="error.jpg"/></center>
+<p>So, I stopped and cleaned the bed to ensure there is no dust on it. And also tried cleaning the extruder of burnt material by moving the filament through it continuously till no more black residues were coming out from it and it was unclogged. I did this by selecting the "Move material" option from the "Advanced" menu in "Maintenance".</p>
+<center><img alt="move" src="move.jpeg"/></center>
+<p>I tried printing the design again and this was completed successfully.</p>
+<center><img alt="correct" src="correct.jpg"/></center>
     </body>
 </html>

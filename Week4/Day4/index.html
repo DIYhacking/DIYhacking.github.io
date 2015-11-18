@@ -11,16 +11,64 @@
     <body>
         
         <h1>Serial communication between two ATtiny boards</h1>
-         <p>This day, I started off by writing the code for my RX and TX ATtiny boards to test serial communication between them. The code can be found at the bottom of the page. I then soldered a common ground connection between the two boards as so:</p>
-<p>An important thing to note is the way the RX and TX lines from each board should be connected with each other. Here, the RX of one board should be connected to the TX of the other board and the TX of the first board to the RX of the first board.</p>
-<p>&nbsp;</p>
-<p>I am using the SoftwareSerial library for ATtiny in Arduino to create a serial port for communication</p>
-<p>&nbsp;</p>
-<p>In the program, I am sending two characters &ldquo;1&rdquo; and &lsquo;&rsquo;2&rdquo; with a delay of 500 ms between the two, serially from the first board to the second board. The second board (RX) lights an LED when it receives the character &ldquo;1&rdquo; and switches off the LED when it receives the character &ldquo;2&rdquo;.</p>
-<p>&nbsp;</p>
-<p>Download files: RXtest.ino, TXtest.ino</p>
-<p>&nbsp;</p>
-       
+         <p>This day, I started off by writing the code for my RX and TX ATtiny boards to test serial communication between them. The first board or TX is the Hello World board that I milled and the second board or RX is the ATtiny based charlieplexed LED board. The code can be found further down embedded in the page.</br> I started off by finding the pin out for the LED array board, in order to just control one LED (D13) from the array. I used ATtiny pins 9 and 12, which are arduino pins 4 and 1 respectively. Toggling 12 LOW and 9 HIGH will light up an LED in the array. The circuit design for the LED array board:</p>
+        <center><img alt="ledarray" src="LEDarray.jpg"/></center>
+        <p>I then soldered a common ground connection between the two boards as so:</p>
+<center><img alt="conn" src="conn.jpg"/></center>
+        <p>An important thing to note is the way the RX and TX lines from each board should be connected with each other. Here, the RX of one board should be connected to the TX of the other board and the TX of the first board to the RX of the first board.</p>
+<center><img alt="txrx" src="txrx.jpg"/></center>
+<p>I am using the SoftwareSerial library for ATtiny in Arduino to create a serial port for communication. In the program, I am sending two characters &ldquo;1&rdquo; and &lsquo;&rsquo;2&rdquo; with a delay of 500 ms between the two, serially from the first board to the second board. The second board (RX) lights an LED when it receives the character &ldquo;1&rdquo; and switches off the LED when it receives the character &ldquo;2&rdquo;. The code for the TX board:</p>
+<pre><code><xmp>#include <SoftwareSerial.h>
+int v;
+SoftwareSerial mySerial(0,1); // RX, TX
+
+void setup() {
+  // Open serial communications and wait for port to open:
+  // set the data rate for the SoftwareSerial port
+  mySerial.begin(9600);
+  pinMode(8,OUTPUT);
+  }
+
+void loop() { // run over and over
+mySerial.print("1");
+digitalWrite(8, HIGH);   
+delay(500);
+
+mySerial.print("2");
+digitalWrite(8, LOW); 
+delay(500);
+}</xmp></code></pre>
+<p>The code for the RX board:</p>
+<div style="overflow: auto; height: 400px;">
+<pre><code><xmp>#include <SoftwareSerial.h>
+SoftwareSerial mySerial(10,9); //RX, TX
+int v;
+
+void setup() {
+  // initialize digital pin 13 as an output.
+  mySerial.begin(9600); 
+  pinMode(1, OUTPUT);
+  pinMode(4,OUTPUT);
+ // pinMode(7,INPUT_PULLUP);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  v = mySerial.read();
+  if(v == '1')
+{
+  digitalWrite(1,LOW);
+  digitalWrite(4,HIGH);
+  }
+
+else if(v == '2')
+{
+  digitalWrite(1,LOW);
+  digitalWrite(4,LOW);
+ }
+  //delay(200);
+ 
+  }</xmp></code></pre></div>
         
     </body>
 </html>
