@@ -10,11 +10,26 @@
     </head>
     <body>
         
-        <h1>Weekly Assignments of Arvind Sanjeev</h1>
-         <p>
-          Will be updated soon.
-        </p>
-       
+        <h1>Protect and preserve filament containers</h1>
+    
+<p>3D printer filaments need to be stored in cool and dark places having minimum humidity. The climate in Kochi is particularly hot and humid throughout the year, which may cause deterioration of several materials, especially filaments if they are not properly stored.</p>
+<p>Hence, in order to protect and preserve the filaments and to ensure good print quality, we are working on creating a container that can be used to store the filaments and protect it from humid conditions. It will be having a salvaged hair dryer on the top, which can used to restore filaments that have been affected by moisture and a top sliding door in the front. In this project, I am designing the linking assembly between the various plywood sheets that would be making up the box having two shelves.</p>
+<center><img alt="links" src="links.png"/></center>
+<p>I am using Rhino to create the design and using the ShopBot to fabricate it. The thickness of the plywood sheets I am using is <strong>12mm</strong>. And the linkages are designed with two pieces that are to be joined at 90degrees with respect to each other.</p>
+<center><img alt="rhino" src="rhino.jpg"/></center>
+<p>The tabs are designed with <strong>30mm</strong> width like so:</p>
+<center><img alt="tab" src="tab.png"/></center>
+<p>And the slots are tested based on the most snug fit. The links should never be loose and should be fixed with each other using a mallet. Depending on the material, a tolerance of <strong>3-5%</strong> should be given while designing slots and tabs. If it is a soft material, the slot width should be less than the tab by more than 5%. Else if it is a hard material, then the width of the slot should be less then the tab by 3% or less. Here I am testing the slots using three values: <strong>28mm, 28.5mm and 29mm</strong> for a tab of <strong>30mm</strong> width.</p>
+<center><img alt="sizes" src="sizes.png"/></center>
+<p>One thing that is important to consider is the diameter of the ShopBot&rsquo;s end bit while designing the test pieces, which is <strong>3.175mm</strong>. Since the machine wouldn&rsquo;t be able to cut 90degree sharp corners, I am compensating for it by including the diameter of the bit in the corners for the tabs. If this isn&rsquo;t done, the links of the sheets wouldn&rsquo;t fit each other perfectly.</p>
+<center><img alt="corners" src="corners.png"/></center>
+<p>Next, I ensured that all the curves and lines for the designs were closed. I checked this by first &ldquo;Exploding&rdquo; the curves and then &ldquo;Joining&rdquo; them again, till I see something like this: &ldquo;25 curves joined into one closed curve&rdquo;.</p>
+<p>Next, I exported the design as a .dxf file after aligning the pieces with respect to each other, keeping in mind the available area on the remaining plywood sheet.</p>
+<center><img alt="rhino" src="rhino.jpg"/></center>
+<p>I then cut the design using the ShopBot, the process for doing that is documented <a href="../../Week2/shopbot/index.html" target="_blank">here</a>. The output from the shopbot:</p>
+<center><img alt="finish2" src="../../Week2/shopbot/finish2.jpg"/></center>
+<p>However, I noticed that none of the three pairs of links created were fitting each other. Hence, concluded on using a greater slot width of something like: <strong>29.8mm or 30mm</strong>.</p>
+<p><strong>Download files:</strong> <a href="boxCut.3dm">BoxCut.3dm</a>, <a href="boxCutNEW.dxf">BoxCut.dxf</a></p>
        
         
     </body>
