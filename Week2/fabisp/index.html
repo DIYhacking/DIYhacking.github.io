@@ -10,19 +10,32 @@
     </head>
     <body>
         
-        <h1>Weekly Assignments of Arvind Sanjeev</h1>
-         <p>
-           This webpage showcases all the learnings from week 2
-        </p>
-        <h3>Navigation:</h3>
-        <ul>
-            <li><a href="vinyl/">1. Using a Vinyl cutter</a></li>
-            <li><a href="modella/">2. Milling PCBs and 3D designs on Modela</a></li>
-            <li><a href="moulding/">3. Moulding and casting using plastic and metal</a></li>
-            <li><a href="shopbot/">4. Cutting shapes on plywood using ShopBot</a></li>
-            <li><a href="laser/">5. Working on the Laser cutter</a></li>
-            <li><a href="fabISP/">6. Making a FabISP</a></li>
-        </ul>
+        <h1>Making a FabISP</h1>
+     <p>An ISP is an In System Programmer used to program or burn bootloaders onto blank microcontrollers. Here, I am using a design for making a FabISP to create a compact ISP programmer. This started off by first milling the board, you can go here to check that out: <a href="../modella/index.html" target="_blank">link</a>.</p>
+<p>After milling the board, I then soldered the components onto it. It uses an ATtiny44 as the controller with a <strong>20MHz</strong> external crystal. I am following this tutorial to make my ISP: <a href="http://fabacademy.org/archives/2015/doc/programming_FabISP.html" target="_blank">http://fabacademy.org/archives/2015/doc/programming_FabISP.html</a></p>
+<center><img alt="isps" src="isps.jpeg"/></center>
+<p>Next, I used another pre programmed ISP and connected it to the new ISP using an ISP cable. I then connected the mini USB cable from my PC to the pre programmed ISP board. Make sure to short the jumper contacts SJ1 and SJ2 (use 0ohm resistor) on the new board while programming.</p>
+<center><img alt="hello" src="hello.ISP.44.png"/></center>
+<p>Next, I installed the firmware necessary for doing it by following the steps here: <a href="http://fabacademy.org/archives/2015/doc/programming_FabISP.html#mac" target="_blank">http://fabacademy.org/archives/2015/doc/programming_FabISP.html#mac</a></p>
+<p>After that, I edited the Makefile in the &ldquo;firmware&rdquo; directory, which was created while unzipping the &ldquo;fabISP_mac.0.8.2_firmware.zip&rdquo; file. I then navigated to the line that said:</p>
+<code>#AVRDUDE = avrdude -c usbtiny -p $(DEVICE) # edit this line for your programmer</code>
+<p>and uncommented it (removed #). This line is to specify the programmer I am using, which is &ldquo;usbtiny&rdquo; and then commented the line that specified the programmer: avrisp2.</p>
+<center><img alt="programmer" src="programmer.png"/></center>
+<p>Then, I navigated to the newly unzipped directory from my terminal &ldquo;fabISP_mac.0.8.2_firmware&rdquo; and performed the command:</p>
+<code>make clean</code>
+<p>After which I got the response:</p>
+<pre><code>Macbook-Pro:Desktop/firmware ARS make clean
+rm -f main.hex main.lst main.obj main.cof main.list main.map main.eep.hex
+main.elf *.o usbdrv/*.o main.s usbdrv/oddebug.s usbdrv/usbdrv.s</code></pre>
+<p>Then I performed the command:</p>
+<code>make hex</code>
+<p>And then set the fuses of the board:</p>
+<code>make fuse</code>
+<p>Next, program the board as an ISP:</p>
+<code>make program</code>
+<p>To verify if the programmer is working, check your USB devices (lsusb or equivalent) to see if there is a new device called &ldquo;FabISP&rdquo;. And voila a new ISP is born! Now remove the jumpers on SJ1 and SJ2 to start using the board as a programmer.</p>
+<center><img alt="usb" src="usb.jpg"/></center>
+      
        
         
     </body>
