@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+        
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Pre Fab</title>
+        <meta name="description" content="An interactive getting started guide for Brackets.">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        
+        <h1>PreFab project- LazyMax 1000</h1>
+         <p>The idea to this project came to me based on an insight that was shared by Francisco during our training. He talked about how his lab only has stools for people to sit on, which being very uncomfortable succumbs the person to stand up and move around. In our case, we had very comfortable rolling chairs for sitting and reclining, which can get you lazy real quick.</p>
+        <center><img alt="proj" src="proj.jpg"/></center>
+<p>In this project, I wanted to solve that problem by creating a sleek gadget which when plugged into our chairs, will prompt the user to get up if they are sitting continuously for more than 10 mins. It does this by using a haptic feedback motor, and it will only notify the person sitting on the chair, instead of disturbing others around him (if I were to use other means like sounds/lights).</p>
+        <p>The project consists of mainly three stages:<br /></p>
+    <ul>
+        <li>Preparing the electronics with the help of Modella</li>
+        <li>Programming</li>
+        <li>Designing and printing it using the Ultimaker</li>      
+</ul>
+        <p><strong>How it works?</strong></p>
+<center><img alt="block" src="block.jpg"/></center>
+<p>The npn phototransistor signals the ATtiny44 when there is no light (this is the case when a person is sitting on the chair). After which the controller starts a timer, if the timer exceeds 10mins then it immediately activates the haptic motor, which prompts the user to get up.</p>
+<p><strong>Components used:</strong></p>
+    <ol>
+    <li>Npn plcc 2 phototransistor</li>
+    <li>ATtiny44 controller</li>
+   <li>20MHz crystal</li>
+    <li>10K resistor</li>
+    <li>6 pin (3x2) header 2nos</li>
+    <li>1uF SMD capacitor</li>
+    <li>9V battery and clip</li>
+        <li>Haptic motor</li>
+        </ol>
+<p><strong>Electronics and Programming:</strong></p>
+<p>I used this tutorial for learning about phototransistors: <a href="http://www.radio-electronics.com/info/data/semicond/phototransistor/photo-transistor-circuits-symbols.php" target="_blank">link</a>. </p>
+<p>The npn phototransistor will be used with a floating base and the emitter connected to ground. The collector needs to be pulled up to Vcc through a resistor (I am doing this with the internal pull up resistor). When the phototransistor detects light (the collector and emitter are shorted) it outputs a logic LOW voltage and a logic HIGH voltage when there is no light. The configuration:</p>
+<center><img alt="trans" src="trans.gif"/></center>
+<p>I started off by using my HelloWorld board milled from the Modella (the process can be seen <a href="../Week4/Day2/index.html" target="_blank">here</a>) and de soldering the button from it. I then attached the phototransistor to <strong>ATtiny pin no: 7</strong>.</br>
+        I found out that the notch in the package of the phototransistor represents the collector terminal. Reference: <a href="http://www.vishay.com/docs/81584/vemt3700.pdf" target="_blank">link1</a> and <a href="http://optekinc.com/datasheets/op580da.pdf" target="_blank">link2</a>.</p>
+<center><img alt="solder1" src="solder1.jpg"/></center>
+<p>After soldering the npn phototransistor, I checked it using arduino. I used the following code to print serially: &ldquo;No light&rdquo; when the phototransistor was not exposed to light and &ldquo;Light detected&rdquo; when it was exposed:</p>
+<div style="overflow: auto; height: 400px;">
+<pre><code><xmp>#include <SoftwareSerial.h>
+int v;
+SoftwareSerial mySerial(0,1); // RX, TX
+
+void setup() {
+  // Open serial communications and wait for port to open:
+  // set the data rate for the SoftwareSerial port
+  mySerial.begin(4800);
+  pinMode(7,INPUT_PULLUP);
+  pinMode(8, OUTPUT);
+  
+}
+
+void loop() { // run over and over
+//mySerial.println(digitalRead(7));
+//delay(200);
+
+
+
+if(digitalRead(7)==0)
+{
+  mySerial.println("Light detected");
+  delay(200);
+}
+else if(digitalRead(7)==1)
+{
+   mySerial.println("No Light");
+  delay(200);
+}
+}
+</xmp></code></pre></div>
+        <center><img alt="serial1" src="serial1.jpg"/></center>
+    <p>Next, I used a salvaged phone haptic motor to connect it to pin <strong>ATtiny pin no 5 (Arduino pin 8)</strong>. And tested the motor by powering it up when there is no light and turning it off when there is.</p>
+    <center><img alt="motor" src="motor.jpg"/></center>
+    
+    <p>A video of the working:</p>
+<p>&nbsp;</p>
+<p>The code used:</p>
+<div style="overflow: auto; height: 400px;">
+<pre><code><xmp>#include <SoftwareSerial.h>
+int v;
+SoftwareSerial mySerial(0,1); // RX, TX
+
+void setup() {
+  // Open serial communications and wait for port to open:
+  // set the data rate for the SoftwareSerial port
+  mySerial.begin(4800);
+  pinMode(7,INPUT_PULLUP);
+  pinMode(8, OUTPUT);//Motor
+  
+}
+
+void loop() { // run over and over
+//mySerial.println(digitalRead(7));
+//delay(200);
+
+if(digitalRead(7)==0)
+{
+  mySerial.println("Light detected");
+  digitalWrite(8,LOW);
+  delay(200);
+}
+else if(digitalRead(7)==1)
+{
+   mySerial.println("No Light");
+  digitalWrite(8,HIGH);
+  delay(200);
+}
+}</xmp></code></pre></div>
+
+    
+<p>Next, I wrote the code to activate the motor if a person is sitting for too long. Ideally, the value should be 10 mins, but for the ease of testing I am using 10 seconds. Here, if the controller detects no light for more than 10 seconds (in real case- 10 mins) the motor starts vibrating and indicates that the user needs to get out of the chair. The code:</p>
+<div style="overflow: auto; height: 400px;">
+<pre><code><xmp>#include <SoftwareSerial.h>
+int v;
+SoftwareSerial mySerial(0,1); // RX, TX
+unsigned long time;
+int i;
+
+void setup() {
+  // Open serial communications and wait for port to open:
+  // set the data rate for the SoftwareSerial port
+  mySerial.begin(4800);
+  pinMode(7,INPUT_PULLUP);
+  pinMode(8, OUTPUT);//Motor
+ }
+
+void loop() { // run over and over
+//mySerial.println(digitalRead(7));
+//delay(200);
+
+if(digitalRead(7)==0)
+{
+  mySerial.println("No one is using me");
+  digitalWrite(8,LOW);
+  delay(200);
+  i=0;
+}
+else if(digitalRead(7)==1)
+{
+  while(i==0)
+  {time = millis();
+  i++;}
+  
+  mySerial.println("You have been sitting for more than 10 mins! Get up and work!");
+  if((millis()-time)>10000)
+  digitalWrite(8,HIGH);
+  delay(200);
+  }
+}</xmp></code></pre></div>
+<center><img alt="serial2" src="serial2.jpg"/></center>
+<p>Next, I decided to add a 5V 1A voltage regulator to power the board using a 9V battery. For this, I used the ZLDO1117 regulator: <a href="http://www.diodes.com/_files/datasheets/ZLDO1117.pdf" target="_blank">link</a>.Then, I added the clip for the 9V battery and looks like this:</p>
+    <center><img alt="clip" src="clip.jpg"/></center>
+<p>A test video:</p>
+<p>&nbsp;</p>
+<p>Then I removed the ISP and FTDI pins to make the board sleek:</p>
+<center><img alt="sleek" src="sleek.jpg"/></center>
+    <p>Testing the board on a temporary setup:</p>
+    <center><img alt="final" src="final.jpeg"/></center>
+<p><strong>Designing and printing:</strong></p>
+<p>After I sorted out the electronics and programming part, I then moved on to designing the casing for the board that could be clipped on to the chair. I used Rhino for designing this.</p>
+    <center><img alt="measure" src="measure.jpg"/></center>
+<p>I started off by measuring the diameter of the chair&rsquo;s edge (<strong>14.15mm</strong>), then the dimensions of the board (<strong>33x23.5mm</strong>). Based on these I started designing the case using polylines. Later, I converted the closed curves into a surface using surface from 3,4 pts function. And then extruded it to a height of <strong>5mm</strong>.</p>
+<center><img alt="design1" src="design1.jpg"/></center>
+<p>Next, I designed the hook for the case. I drew it using the polylines and circle function and then joined it into a closed curve. Next, I used the &ldquo;Surface from planar curves&rdquo; function to convert it into a surface and then extruded it to <strong>20mm</strong>. This is how it looks:</p>
+<center><img alt="design2" src="design2.jpeg"/></center>
+<p>Next, I will be printing the exported .stl file using Cura on the Ultimaker.</p>
+<center><img alt="model2" src="model1.jpeg"/></center>
+<p><strong>Download files:</strong> <a href="LazyMax.3dm">LazyMax.3dm</a>, <a href="LazyMax.stl">LazyMax.stl</a></p>
+<p>&nbsp;</p>
+        
+    </body>
+</html>
